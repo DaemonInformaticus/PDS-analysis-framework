@@ -1,0 +1,186 @@
+Database tables. 
+
+tblUser
+- id INT PRIMAIRY KEY AUTO_INCREMENT
+- name TEXT
+- username TEXT
+- password TEXT
+- email TEXT
+- state ENUM('registered', 'active', 'blocked')
+- session TEXT
+- languageID INT
+- userGroup TEXT
+- IP TEXT
+- lastLogin DATETIME
+- created DATETIME
+- updated DATETIME
+- createdBy INT
+- updatedBy INT
+
+SQL: CREATE TABLE tblUser(id INT PRIMARY KEY AUTO_INCREMENT, name TEXT, username TEXT, password TEXT, email TEXT, state ENUM('registered', 'active', 'blocked'), session TEXT, languageID INT, userGroup TEXT, IP TEXT, lastLogin DATETIME, created DATETIME, updated DATETIME, createdBy INT, updatedBy INT);
+
+
+-- tblUserGroup: Contains user groups and their access levels. When a user is linked to a group, the group level is copied to the user. 
+-- Therefore, there is no real link between user and group. 
+tblUserGroup
+- id INT PRIMARY KEY AUTO_INCREMENT
+- name TEXT
+- created DATETIME
+- updated DATETIME
+- createdBy INT
+- updatedBy INT
+
+SQL: CREATE TABLE tblUserGroup(id INT PRIMARY KEY AUTO_INCREMENT, name TEXT, created DATETIME, updated DATETIME, createdBy INT, updatedBy INT);
+
+
+-- These elements can be used to grant access to a security item. 
+-- Groups are linked to sets of Access elements and any user added to a group gets these elements. 
+tblAccessElements
+- id          INT PRIMARY KEY AUTO_INCREMENT
+- name        TEXT
+- description TEXT
+- active      INT
+- created     DATETIME
+- updated     DATETIME
+- createdBy   INT
+- updatedBy   INT
+
+SQL: CREATE TABLE tblAccessElements(id INT PRIMARY KEY AUTO_INCREMENT, name TEXT, description TEXT, active INT, created DATETIME, updated DATETIME, createdBy INT, updatedBy INT);
+
+
+tblGroupToAccess
+- id INT PRIMARY KEY AUTO_INCREMENT
+- groupID INT
+- accessID INT
+- created DATETIME
+- updated DATETIME
+- createdBy INT
+- updatedBy INT
+
+SQL: CREATE TABLE tblGroupToAccess(id INT PRIMARY KEY AUTO_INCREMENT, groupID INT, accessID INT, created DATETIME, updated DATETIME, createdBy INT, updatedBy INT);
+
+
+tblUserToAccess
+- id INT PRIMARY KEY AUTO_INCREMENT
+- userID INT
+- accessID INT
+- created DATETIME
+- updated DATETIME
+- createdBy INT
+- updatedBy INT
+
+SQL: CREATE TABLE tblUserToAccess(id INT PRIMARY KEY AUTO_INCREMENT, userID INT, accessID INT, created DATETIME, updated DATETIME, createdBy INT, updatedBy INT);
+
+
+-- tblLogbook: Contains notices, warnings and errors coming from the code. Used for debugging and security. 
+tblLogbook
+- id INT PRIMARY KEY AUTO_INCREMENT
+- IP TEXT
+- description TEXT
+- type INT
+- website TEXT
+- created DATETIME
+- updated DATETIME
+- createdBy INT
+- updatedBy INT
+
+SQL: CREATE TABLE tblLogbook(id INT PRIMARY KEY AUTO_INCREMENT, IP TEXT, description TEXT, type INT, website TEXT, created DATETIME, updated DATETIME, createdBy INT, updatedBy INT);
+
+
+tblLanguage
+- id INT PRIMARY KEY AUTO_INCREMENT
+- name TEXT
+- description TEXT
+- active INT
+- created DATETIME
+- updated DATETIME
+- createdBy INT
+- updatedBy INT
+
+SQL: CREATE TABLE tblLanguage(id INT PRIMARY KEY AUTO_INCREMENT, name TEXT, description TEXT, active INT, created DATETIME, updated DATETIME, createdBy INT, updatedBy INT);
+
+
+tblLanguageLine
+- id INT PRIMARY KEY AUTO_INCREMENT
+- languageID INT
+- fieldname TEXT
+- value TEXT
+- active INT
+- created DATETIME
+- updated DATETIME
+- createdBy INT
+- updatedBy INT
+
+SQL: CREATE TABLE tblLanguageLine(id INT PRIMARY KEY AUTO_INCREMENT, languageID INT, fieldname TEXT, value TEXT, active INT, created DATETIME, updated DATETIME, createdBy INT, updatedBy INT);
+
+
+tblDataSet
+- id INT PRIMARY KEY AUTO_INCREMENT
+- setGroup TEXT
+- setIdentifier TEXT
+- created DATETIME
+- updated DATETIME
+- createdBy INT
+- updatedBy INT
+
+SQL: CREATE TABLE tblDataSet(id INT PRIMARY KEY AUTO_INCREMENT, setGroup TEXT, setIdentifier TEXT, created DATETIME, updated DATETIME, createdBy INT, updatedBy INT);
+
+
+tblDataSetDescription
+- id          INT PRIMARY KEY AUTO_INCREMENT
+- datasetID   LONG
+- stringKey   TEXT
+- stringValue TEXT
+- created     DATETIME
+- updated     DATETIME
+- createdBy   INT
+- updatedBy   INT
+
+SQL: CREATE TABLE tblDataSetDescription(id INT PRIMARY KEY AUTO_INCREMENT, datasetID LONG, stringKey TEXT, stringValue TEXT, created DATETIME, updated DATETIME, createdBy INT, updatedBy INT);
+
+
+tblColumnDescriptor
+- id          INT PRIMARY KEY AUTO_INCREMENT
+- datasetID   INT
+- colIndex    INT
+- stringKey   TEXT
+- stringValue TEXT
+- created     DATETIME
+- updated     DATETIME
+- createdBy   INT
+- updatedBy   INT
+
+SQL: CREATE TABLE tblColumnDescriptor(id INT PRIMARY KEY AUTO_INCREMENT, datasetID INT, colIndex INT, stringKey TEXT, stringValue TEXT, created DATETIME, updated DATETIME, createdBy INT, updatedBy INT);
+
+
+tblColumnValue
+- id          INT PRIMARY KEY AUTO_INCREMENT
+- datasetID   INT
+- columnindex INT
+- rowIndex    INT
+- stringValue VARCHAR(24)
+- created     DATETIME
+- updated     DATETIME
+- createdBy   INT
+- updatedBy   INT
+
+SQL: CREATE TABLE tblColumnValue(id INT PRIMARY KEY AUTO_INCREMENT, datasetID INT, columnIndex INT, rowIndex INT, stringValue VARCHAR(24), created DATETIME, updated DATETIME, createdBy INT, updatedBy INT);
+
+
+tbl
+- id INT PRIMARY KEY AUTO_INCREMENT
+
+- created DATETIME
+- updated DATETIME
+- createdBy INT
+- updatedBy INT
+
+SQL: 
+
+CREATE TABLE 
+
+, created DATETIME
+, updated DATETIME
+, createdBy INT
+, updatedBy INT
+);
