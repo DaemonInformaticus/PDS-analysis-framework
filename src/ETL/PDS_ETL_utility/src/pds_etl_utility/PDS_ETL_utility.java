@@ -295,9 +295,9 @@ public class PDS_ETL_utility
         return true;
     }
     
-    private boolean initDataSet()
+    private boolean initDataSet(String groupName, String identifier)
     {
-        CDataDataset set = new CDataDataset(m_conn, "Group1", "identifier");
+        CDataDataset set = new CDataDataset(m_conn, groupName, identifier);
 
         set.insertLine();
         
@@ -338,7 +338,7 @@ public class PDS_ETL_utility
         System.out.println("There are " + m_colDesc.size()      + " column description lines.");
     }
     
-    public PDS_ETL_utility(String path, String pathData)
+    public PDS_ETL_utility(String path, String pathData, String group, String identifier)
     {
         m_path          = path;
         m_pathData      = pathData;
@@ -346,11 +346,11 @@ public class PDS_ETL_utility
         m_colDesc       = new ArrayList<CDataColumnDescriptor>();
         m_dataLines     = new ArrayList<CDataValue>();
         boolean bParse  = initReader();
-        bParse          = bParse == true ? createDBConnection() : false;
-        bParse          = bParse == true ? initDataSet()        : false;
-        bParse          = bParse == true ? extract()            : false;
-        bParse          = bParse == true ? load()               : false;
-        bParse          = bParse == true ? readData()           : false;
+        bParse          = bParse == true ? createDBConnection()             : false;
+        bParse          = bParse == true ? initDataSet(group, identifier)   : false;
+        bParse          = bParse == true ? extract()                        : false;
+        bParse          = bParse == true ? load()                           : false;
+        bParse          = bParse == true ? readData()                       : false;
         
         if(bParse == true)
         {
@@ -368,12 +368,16 @@ public class PDS_ETL_utility
     public static void main(String[] args) 
     {
         // first argument in the call should be the absolute path of the file. 
-        String path     = "c:\\file.txt";
-        String pathData = "c:\\data.txt";
+        String path         = "c:\\file.txt";
+        String pathData     = "c:\\data.txt";
+        String group        = "group";
+        String identifier   = "identifier";
         
         if(args.length > 0) path        = args[0];
         if(args.length > 1) pathData    = args[1];
+        if(args.length > 2) group       = args[2];
+        if(args.length > 3) identifier  = args[3];
         
-        PDS_ETL_utility app = new PDS_ETL_utility(path, pathData);
+        PDS_ETL_utility app = new PDS_ETL_utility(path, pathData, group, identifier);
     }
 }
